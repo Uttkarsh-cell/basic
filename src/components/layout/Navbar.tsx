@@ -25,6 +25,9 @@ export function Navbar() {
   // close mobile menu on route change
   useEffect(() => setMobileOpen(false), [pathname]);
 
+  // The admin area has its own chrome — hide the public navbar there.
+  if (pathname?.startsWith('/admin')) return null;
+
   return (
     <header
       className={cn(
