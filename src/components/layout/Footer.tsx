@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Gamepad2, Twitter, Youtube, Instagram, MessageCircle } from 'lucide-react';
 import { siteConfig } from '@/lib/site';
 import { getCategories } from '@/lib/queries';
@@ -40,7 +43,11 @@ const socials = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
   const categories = getCategories().slice(0, 12);
+
+  // The admin area has its own chrome — hide the public footer there.
+  if (pathname?.startsWith('/admin')) return null;
 
   return (
     <footer className="mt-20 border-t border-white/10 bg-surface/40">

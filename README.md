@@ -79,9 +79,19 @@ npm run build && npm start
   reduced external dependencies (thumbnails are generated gradients, so no broken images).
 
 ### Roadmap (documented, see `docs/`)
-- Real auth with **Firebase**, backend **Express/MongoDB** API, **Admin panel** (CRUD, analytics,
-  ad & user management), live multiplayer, tournaments, daily rewards / lucky spin, push
-  notifications and offline service worker.
+- Real auth with **Firebase**, backend **Express/MongoDB** API, live multiplayer, tournaments,
+  daily rewards / lucky spin, push notifications and offline service worker.
+
+### Admin panel (`/admin`)
+A cohesive, in-app admin area (public navbar/footer auto-hide on `/admin`):
+- **Dashboard** — KPI cards (plays, revenue, users, active now) with animated counters, a 14-day
+  plays bar chart, revenue-by-month chart, traffic-source donut, open-reports queue and a top-games
+  table. Charts are pure SVG/CSS (no chart library).
+- **Games** — searchable table with **add / edit / delete** (modal form), featured & trending
+  toggles (fully interactive, client-side state).
+- **Categories · Users · Advertisements · Reports** — management views with badges, statuses and
+  performance metrics.
+> The demo enforces no auth — guard `/admin` with a `middleware.ts` role check before deploying.
 
 ---
 
@@ -128,11 +138,13 @@ src/
 │   ├── manifest.ts robots.ts sitemap.ts
 │   ├── games/                # /games (explorer) + /games/[slug] (detail) + loading
 │   ├── category/[slug]/      # category landing pages
+│   ├── admin/                # admin panel: dashboard, games, categories, users, ads, reports
 │   ├── search/ leaderboard/ profile/ about/ contact/ privacy/ terms/ news/
 │   └── api/                  # route stubs: /api/games, /api/games/[slug], /api/search
 ├── components/
 │   ├── home/                 # Hero, GameSection, TrendingGames, Categories, Community, News…
 │   ├── game/                 # GameCard, GamePlayer, GameActions, Reviews, GamesExplorer…
+│   ├── admin/                # AdminSidebar, StatCard, Charts, GamesManager
 │   ├── layout/               # Navbar, SearchBar, AuthMenu, Footer
 │   ├── ui/                   # Icon, SectionHeader, RatingStars, Badge, Skeleton, AnimatedCounter
 │   ├── ads/                  # AdSlot (AdSense-ready)
